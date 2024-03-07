@@ -52,7 +52,6 @@ COPY --from=build /app/build /app/build
 COPY --from=build /app/public /app/public
 COPY --from=build /app/package.json /app/package.json
 COPY --from=build /app/database /app/database
-COPY --from=build /app/content /app/content
 
 # Write the start script
 RUN echo "#!/bin/sh\nset -x\nnpx prisma generate\nnpx prisma migrate deploy\nnpm run start" > /app/start.sh && chmod +x /app/start.sh
