@@ -1,0 +1,14 @@
+node_modules
+
+/.cache
+/build
+/public/build
+.env
+.DS_Store
+
+# Prisma SQLite
+database/database.db
+database/database.db-journal
+
+# Docker Volumes
+data/
