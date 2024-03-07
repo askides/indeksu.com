@@ -10,6 +10,7 @@ import {
 } from "@remix-run/react";
 
 import "@fontsource-variable/plus-jakarta-sans/wght.css";
+import "@fontsource/pt-mono/400.css";
 import "./styles/tailwind.css";
 
 export const links: LinksFunction = () => [

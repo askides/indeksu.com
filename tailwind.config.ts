@@ -10,6 +10,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ["Plus Jakarta Sans Variable", ...defaultTheme.fontFamily.sans],
+        mono: ["PT Mono", ...defaultTheme.fontFamily.mono],
       },
     },
   },

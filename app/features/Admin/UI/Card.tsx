@@ -2,7 +2,7 @@ import React from "react";
 import { tv } from "tailwind-variants";
 
 const cardStyles = tv({
-  base: "rounded-2xl bg-white p-5 shadow-xs border border-slate-200",
+  base: "rounded-2xl bg-white shadow-xs border border-slate-200",
 });
 
 export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {}
@@ -12,7 +12,7 @@ function Card({ className, ...others }: CardProps) {
 }
 
 const cardHeaderStyles = tv({
-  base: "space-y-0",
+  base: "space-y-0 p-5",
 });
 
 export interface CardHeaderProps extends React.HTMLAttributes<HTMLDivElement> {}
@@ -22,7 +22,7 @@ function CardHeader({ className, ...others }: CardHeaderProps) {
 }
 
 const cardTitleStyles = tv({
-  base: "text-slate-900 tracking-tight text-lg font-semibold leading-7",
+  base: "text-slate-900 text-lg font-semibold leading-7",
 });
 
 export interface CardTitleProps extends React.HTMLAttributes<HTMLDivElement> {}
@@ -45,7 +45,7 @@ function CardSubtitle({ className, ...others }: CardSubtitleProps) {
 }
 
 const cardBodyStyles = tv({
-  base: "mt-5",
+  base: "p-5",
 });
 
 export interface CardBodyProps extends React.HTMLAttributes<HTMLDivElement> {}

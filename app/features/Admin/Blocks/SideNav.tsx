@@ -1,8 +1,11 @@
 import { Form, Link } from "@remix-run/react";
-import { IconDashboard, IconDoorExit } from "@tabler/icons-react";
+import { IconDashboard, IconDoorExit, IconGlobe } from "@tabler/icons-react";
 
 export function SideNav() {
-  const items = [{ label: "Dashboard", to: "/dashboard", icon: IconDashboard }];
+  const items = [
+    { label: "Dashboard", to: "/dashboard", icon: IconDashboard },
+    { label: "Websites", to: "/sites", icon: IconGlobe },
+  ];
 
   return (
     <aside className="flex fixed top-0 left-0 flex-col w-52 h-screen px-5 py-6 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-l">
@@ -15,9 +18,11 @@ export function SideNav() {
       </Link>
 
       <div className="flex flex-col justify-between flex-1 mt-6">
-        <nav className="-mx-3 space-y-6 ">
+        <nav className="-mx-3 space-y-6">
           <div className="space-y-3">
-            <label className="px-3 text-xs text-snow-200 uppercase">Menu</label>
+            <label className="px-3 text-xs font-semibold text-slate-600 uppercase">
+              Menu
+            </label>
 
             {items.map((item, idx) => (
               <Link
