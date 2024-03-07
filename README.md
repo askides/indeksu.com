@@ -16,6 +16,6 @@ In addition, there will be also a hosted version of the app, for the people that
 
 At the moment, Indeksu is in its early stages. We are working on the first version of the tool and we are looking for feedback from the community. Feel free to jump in and help us shape the future of Indeksu.
 
-## How can I help?
+## How can I help?
 
 First in first, give me a star, and share this project with your friends that want to learn how to build a SaaS application using Remix. Also, feel free to open issues and pull requests to help us improve the app.
