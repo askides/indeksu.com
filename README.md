@@ -6,7 +6,7 @@ Team Up With Search Engines! Index Faster, Rank Higher.
 
 Indeksu is a tool built using Remix to help you index your websites faster. Built in public and proudly open source.
 
-## What is the goal of Indeksu?
+## What is the goal of Indeksu?
 
 The main goal of this app is to help developers to learn how to build a fully functional SaaS application using Remix and other modern tools. That's why i decided to build it in public and open source.
 
