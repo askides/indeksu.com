@@ -1,6 +1,6 @@
 import type { MetaFunction } from "@remix-run/node";
 import { Link } from "@remix-run/react";
-import { IconChecks } from "@tabler/icons-react";
+import { IconBrandGithub, IconChecks } from "@tabler/icons-react";
 import { createPageSeo } from "~/features/Shared/Utils/createPageSeo";
 
 export const meta: MetaFunction = () => {
@@ -32,12 +32,15 @@ export default function Page() {
             >
               Start For Free
             </Link>
-            <Link
-              to="/auth/signup"
-              className="rounded-full bg-gray-100 text-black px-7 py-4 font-semibold uppercase"
+            <a
+              href="https://github.com/askides/indeksu.com"
+              target="_blank"
+              rel="noreferrer noopener"
+              className="rounded-full bg-gray-100 text-black px-7 py-4 font-semibold uppercase inline-flex gap-2"
             >
-              Give Us A Star
-            </Link>
+              <IconBrandGithub size={24} className="shrink-0" />
+              <span>Give Us A Star</span>
+            </a>
           </div>
           <div className="flex items-center justify-center flex-wrap gap-8 mt-16">
             <div className="flex items-center gap-3">

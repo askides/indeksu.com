@@ -49,7 +49,13 @@ export default function Layout() {
               <div className="font-bold text-xl tracking-tight">Resources</div>
               <ul className="space-y-5 tracking-tight font-medium underline">
                 <li>
-                  <Link to="/faq">Open Source</Link>
+                  <a
+                    href="https://github.com/askides/indeksu.com"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                  >
+                    Open Source
+                  </a>
                 </li>
               </ul>
             </div>
