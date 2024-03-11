@@ -54,11 +54,22 @@ function CardBody({ className, ...others }: CardBodyProps) {
   return <div className={cardBodyStyles({ class: className })} {...others} />;
 }
 
+const cardFooterStyles = tv({
+  base: "space-y-0 p-5",
+});
+
+export interface CardFooterProps extends React.HTMLAttributes<HTMLDivElement> {}
+
+function CardFooter({ className, ...others }: CardFooterProps) {
+  return <div className={cardFooterStyles({ class: className })} {...others} />;
+}
+
 const Composed = Object.assign(Card, {
   Header: CardHeader,
   Body: CardBody,
   Title: CardTitle,
   Subtitle: CardSubtitle,
+  Footer: CardFooter,
 });
 
 export { Composed as Card };
