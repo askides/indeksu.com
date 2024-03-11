@@ -7,7 +7,9 @@ import {
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import { useState } from "react";
 import { db } from "~/database/client";
+import { Button } from "~/features/Admin/UI/Button";
 import { Card } from "~/features/Admin/UI/Card";
 import { Table } from "~/features/Admin/UI/Table";
 import { authenticator } from "~/features/Shared/Services/auth.server";
@@ -51,6 +53,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
 }
 
 export default function Page() {
+  const [isRefreshing, setIsRefreshing] = useState(false);
   const { sites } = useLoaderData<typeof loader>();
 
   const table = useReactTable({
@@ -58,6 +61,20 @@ export default function Page() {
     columns: columns,
     getCoreRowModel: getCoreRowModel(),
   });
+
+  const onRefresh = async () => {
+    setIsRefreshing(true);
+
+    const res = await fetch("/api/sites", {
+      method: "POST",
+    });
+
+    if (res.ok) {
+      window.location.reload();
+    } else {
+      setIsRefreshing(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-slate-50 p-5">
@@ -105,6 +122,11 @@ export default function Page() {
             </tbody>
           </Table>
         </Card.Body>
+        <Card.Footer className="border-t border-slate-100">
+          <Button type="button" onClick={onRefresh} loading={isRefreshing}>
+            Refresh Sites
+          </Button>
+        </Card.Footer>
       </Card>
     </div>
   );
