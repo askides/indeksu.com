@@ -1,40 +1,60 @@
+import { Site } from "@prisma/client";
+import { LoaderFunctionArgs, SerializeFrom, json } from "@remix-run/node";
+import { Link, useLoaderData } from "@remix-run/react";
 import {
   createColumnHelper,
   flexRender,
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import { db } from "~/database/client";
 import { Card } from "~/features/Admin/UI/Card";
 import { Table } from "~/features/Admin/UI/Table";
+import { authenticator } from "~/features/Shared/Services/auth.server";
 
-const columnFactory = createColumnHelper<{
-  url: string;
-  status: string;
-}>();
+const columnFactory = createColumnHelper<SerializeFrom<Site>>();
 
 const columns = [
-  columnFactory.accessor("url", { header: "URL" }),
-  columnFactory.accessor("status", { header: "Status" }),
+  columnFactory.accessor("resource", {
+    header: "URL",
+    cell: (row) => row.getValue(),
+  }),
+  columnFactory.accessor("status", {
+    header: "Status",
+    cell: (row) => (row.getValue() === 0 ? "Inactive" : "Active"),
+  }),
+  columnFactory.display({
+    header: "Actions",
+    cell: (cell) => (
+      <Link
+        className="text-sky-500 hover:underline"
+        to={`/sites/${cell.row.original.id}`}
+      >
+        View Site
+      </Link>
+    ),
+  }),
 ];
 
-const data: { url: string; status: string }[] = [
-  {
-    url: "https://google.com",
-    status: "Active",
-  },
-  {
-    url: "https://facebook.com",
-    status: "Inactive",
-  },
-  {
-    url: "https://twitter.com",
-    status: "Inactive",
-  },
-];
+export async function loader({ request }: LoaderFunctionArgs) {
+  const session = await authenticator.isAuthenticated(request, {
+    failureRedirect: "/auth/signin",
+  });
+
+  const data = await db.site.findMany({
+    where: {
+      user_id: session.id,
+    },
+  });
+
+  return json({ sites: data });
+}
 
 export default function Page() {
+  const { sites } = useLoaderData<typeof loader>();
+
   const table = useReactTable({
-    data: data,
+    data: sites,
     columns: columns,
     getCoreRowModel: getCoreRowModel(),
   });

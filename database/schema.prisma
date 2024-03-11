@@ -15,6 +15,42 @@ model User {
   created_at  DateTime? @default(now())
   updated_at  DateTime? @updatedAt
 
+  // Relationships
+  OAuthToken OAuthToken?
+  Sites      Site[]
+
   // I hate non-lowercased columns.
   @@map("users")
+}
+
+model OAuthToken {
+  id            String   @id @default(cuid())
+  access_token  String
+  refresh_token String
+  scopes        String
+  user_id       String   @unique
+  expires_at    DateTime
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+
+  // Relationships
+  User User @relation(fields: [user_id], references: [id])
+
+  // I hate non-lowercased columns.
+  @@map("oauth_tokens")
+}
+
+model Site {
+  id         String   @id @default(cuid())
+  resource   String
+  status     Int
+  user_id    String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  // Relationships
+  User User @relation(fields: [user_id], references: [id])
+
+  // I hate non-lowercased columns.
+  @@map("sites")
 }
