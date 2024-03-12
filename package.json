@@ -7,6 +7,8 @@
     "build": "remix build",
     "dev": "remix dev --manual",
     "start": "dotenv -e .env remix-serve ./build/index.js",
+    "start:worker:sites": "tsx app/commands/start-sites-worker.ts",
+    "start:worker:urls": "tsx app/commands/start-urls-worker.ts",
     "typecheck": "tsc",
     "prepare": "husky"
   },
@@ -38,6 +40,7 @@
     "remix-utils": "^7.5.0",
     "sitemapper": "^3.2.8",
     "tailwind-variants": "^0.2.0",
+    "tsx": "^4.7.1",
     "valibot": "^0.20.1"
   },
   "devDependencies": {

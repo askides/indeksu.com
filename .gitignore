@@ -12,3 +12,6 @@ database/database.db-journal
 
 # Docker Volumes
 data/
+
+# PM2
+.logs/
