@@ -6,7 +6,7 @@
   "scripts": {
     "build": "run-s build:**",
     "build:remix": "remix build",
-    "build:workers": "tsup --minify --outDir build/workers app/commands/*.ts",
+    "build:commands": "tsup --minify --outDir build/commands app/commands/*.ts",
     "dev": "remix dev --manual",
     "dev:worker:sites": "tsx app/commands/start-sites-worker.ts",
     "dev:worker:urls": "tsx app/commands/start-urls-worker.ts",
