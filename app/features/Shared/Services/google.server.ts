@@ -39,8 +39,6 @@ export class Google {
 
     // Check if is expired from SQLite
     if (credentials.expires_at.getTime() < Date.now()) {
-      console.info("The access token is expired...");
-
       // Refresh the credentials
       this._client.setCredentials({
         refresh_token: credentials.refresh_token,
@@ -65,8 +63,6 @@ export class Google {
         scope: updated.scopes,
       };
     }
-
-    console.log("The access token is not expired...");
 
     return {
       access_token: credentials.access_token,
