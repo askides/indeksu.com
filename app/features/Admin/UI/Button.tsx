@@ -37,10 +37,10 @@ export interface ButtonProps
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, loading = false, children, ...props }, ref) => {
+  ({ className, loading = false, size, fluid, children, ...props }, ref) => {
     return (
       <button
-        className={styles({ class: className })}
+        className={styles({ class: className, size, fluid })}
         ref={ref}
         disabled={loading}
         {...props}
