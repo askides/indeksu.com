@@ -1,7 +1,6 @@
 import { LoaderFunctionArgs, json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { db } from "~/database/client";
-import { Button } from "~/features/Admin/UI/Button";
 import { Card } from "~/features/Admin/UI/Card";
 import { Table } from "~/features/Admin/UI/Table";
 import { authenticator } from "~/features/Shared/Services/auth.server";
@@ -29,20 +28,6 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
 
 export default function Page() {
   const { site, sitemaps, pages } = useLoaderData<typeof loader>();
-
-  const onClick = async () => {
-    const res = await fetch(`/api/indeksu`, {
-      method: "POST",
-      body: JSON.stringify({ id: site.id }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    if (res.ok) {
-      alert("Index request sent.");
-    }
-  };
 
   return (
     <div className="min-h-screen bg-slate-50 p-5 space-y-5">
@@ -80,11 +65,6 @@ export default function Page() {
             </tbody>
           </Table>
         </Card.Body>
-        <Card.Footer className="border-t border-slate-100">
-          <Button type="button" onClick={onClick} loading={false}>
-            Request Index
-          </Button>
-        </Card.Footer>
       </Card>
 
       <Card>
@@ -110,7 +90,7 @@ export default function Page() {
                 <tr className="h-10">
                   <Table.Cell className="font-mono">{el.url}</Table.Cell>
                   <Table.Cell className="font-mono text-right">
-                    {new Date(el.notified_at).toLocaleDateString("en-US", {
+                    {new Date(el.notified_at!).toLocaleDateString("en-US", {
                       year: "numeric",
                       month: "long",
                       day: "numeric",
