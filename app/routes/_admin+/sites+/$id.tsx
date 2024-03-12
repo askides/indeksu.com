@@ -17,10 +17,11 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
   });
 
   const client = await new Google().asUser(session.id);
-  const sitemaps = await client.fetchSitemaps(session.id);
+  const sitemaps = await client.fetchSitemaps(site.id);
 
-  const pages = await db.page.findMany({
-    where: { site_id: site.id },
+  const pages = await db.url.findMany({
+    where: { site_id: site.id, notified_at: { not: null } },
+    orderBy: { notified_at: "desc" },
   });
 
   return json({ site, sitemaps, pages });
