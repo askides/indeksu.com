@@ -10,6 +10,9 @@ import { urlsQueue } from "~/features/Admin/Queues/UrlsQueue";
       next_run_at: {
         lte: new Date(),
       },
+      Site: {
+        status: 1,
+      },
     },
     include: {
       Site: {
@@ -23,9 +26,11 @@ import { urlsQueue } from "~/features/Admin/Queues/UrlsQueue";
 
   console.log("INFO: Urls to be indexed:", urls.length);
 
-  await urlsQueue.dispatch({
-    urls: urls,
-  });
+  if (urls.length > 0) {
+    await urlsQueue.dispatch({
+      urls: urls,
+    });
+  }
 
   console.log("INFO: URLs Enqueued Successfully!");
   console.log("#################################");
