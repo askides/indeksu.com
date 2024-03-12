@@ -10,7 +10,7 @@ module.exports = {
     },
     {
       name: "Sites Queue Worker",
-      script: "npm run start:worker:sites",
+      script: "./build/workers/start-sites-worker.cjs",
       out_file: "./.logs/sites.access.log",
       error_file: "./.logs/sites.error.log",
       log_date_format: "YYYY-MM-DD HH:mm:ss Z",
@@ -18,7 +18,7 @@ module.exports = {
     },
     {
       name: "Sites Urls Worker",
-      script: "npm run start:worker:urls",
+      script: "./build/workers/start-urls-worker.cjs",
       out_file: "./.logs/urls.access.log",
       error_file: "./.logs/urls.error.log",
       log_date_format: "YYYY-MM-DD HH:mm:ss Z",
