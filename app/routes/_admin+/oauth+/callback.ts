@@ -1,5 +1,6 @@
 import { LoaderFunctionArgs, json, redirect } from "@remix-run/node";
 import { db } from "~/database/client";
+import { sitesQueue } from "~/features/Admin/Queues/SitesQueue";
 import { authenticator } from "~/features/Shared/Services/auth.server";
 import { Google } from "~/features/Shared/Services/google.server";
 
@@ -54,22 +55,28 @@ export async function loader({ request }: LoaderFunctionArgs) {
   const sites = await client.fetchSites();
 
   for (const site of sites) {
-    const row = await db.site.findFirst({
+    const _site = await db.site.upsert({
       where: {
-        resource: site,
-        user_id: user.id,
-      },
-    });
-
-    if (!row) {
-      await db.site.create({
-        data: {
+        resource_user_id: {
           resource: site,
-          status: 0,
           user_id: user.id,
         },
-      });
-    }
+      },
+      create: {
+        resource: site,
+        status: 0,
+        user_id: user.id,
+      },
+      update: {},
+    });
+
+    // Enqueue Site Indexing
+    const enqueued = await sitesQueue.dispatch({
+      uid: user.id,
+      sid: _site.id,
+    });
+
+    console.log("Site Enqueued:", _site.id, "Job ID:", enqueued.id);
   }
 
   return redirect("/sites");
