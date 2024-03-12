@@ -34,6 +34,7 @@
     "remix-auth": "^3.6.0",
     "remix-auth-form": "^1.4.0",
     "remix-utils": "^7.5.0",
+    "sitemapper": "^3.2.8",
     "tailwind-variants": "^0.2.0",
     "valibot": "^0.20.1"
   },
