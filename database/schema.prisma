@@ -52,12 +52,15 @@ model Site {
   User  User   @relation(fields: [user_id], references: [id])
   Pages Page[]
 
+  // Ensure that the resource is unique per user.
+  @@unique([resource, user_id])
   // I hate non-lowercased columns.
   @@map("sites")
 }
 
 model Page {
-  url         String   @id
+  id          String   @id @default(cuid())
+  url         String
   site_id     String
   notified_at DateTime
   created_at  DateTime @default(now())
@@ -66,6 +69,8 @@ model Page {
   // Relationships
   Site Site @relation(fields: [site_id], references: [id])
 
+  // Ensure that the URL is unique per site.
+  @@unique([url, site_id])
   // I hate non-lowercased columns.
   @@map("pages")
 }
