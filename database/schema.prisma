@@ -49,8 +49,23 @@ model Site {
   updated_at DateTime @updatedAt
 
   // Relationships
-  User User @relation(fields: [user_id], references: [id])
+  User  User   @relation(fields: [user_id], references: [id])
+  Pages Page[]
 
   // I hate non-lowercased columns.
   @@map("sites")
+}
+
+model Page {
+  url         String   @id
+  site_id     String
+  notified_at DateTime
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+
+  // Relationships
+  Site Site @relation(fields: [site_id], references: [id])
+
+  // I hate non-lowercased columns.
+  @@map("pages")
 }
