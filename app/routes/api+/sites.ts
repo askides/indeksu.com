@@ -9,7 +9,8 @@ export async function action({ request }: ActionFunctionArgs) {
   });
 
   // Import User's Sites
-  const sites = await new Google().fetchUserSites(session.id);
+  const client = await new Google().asUser(session.id);
+  const sites = await client.fetchSites();
 
   for (const site of sites) {
     const row = await db.site.findFirst({

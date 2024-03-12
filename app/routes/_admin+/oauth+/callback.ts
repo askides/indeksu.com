@@ -23,7 +23,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
   }
 
   // Obtain User's Google Token
-  const { tokens } = await new Google().client().getToken(code);
+  const { tokens } = await Google.tokens(code);
 
   // Upsert Access Token
   await db.oAuthToken.upsert({
@@ -50,7 +50,8 @@ export async function loader({ request }: LoaderFunctionArgs) {
   });
 
   // Import User's Sites
-  const sites = await new Google().fetchUserSites(session.id);
+  const client = await new Google().asUser(session.id);
+  const sites = await client.fetchSites();
 
   for (const site of sites) {
     const row = await db.site.findFirst({

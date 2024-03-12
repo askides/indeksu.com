@@ -7,7 +7,7 @@ export async function action({ request }: ActionFunctionArgs) {
     failureRedirect: "/auth/signin",
   });
 
-  const url = await new Google().redirect();
+  const url = await Google.redirect();
 
   return redirect(url);
 }

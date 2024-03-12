@@ -16,7 +16,8 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
     where: { id: params.id, user_id: session.id },
   });
 
-  const sitemaps = await new Google().fetchSiteSitemaps(session.id, site.id);
+  const client = await new Google().asUser(session.id);
+  const sitemaps = await client.fetchSitemaps(session.id);
 
   const pages = await db.page.findMany({
     where: { site_id: site.id },
