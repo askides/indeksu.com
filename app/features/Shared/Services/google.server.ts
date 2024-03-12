@@ -110,6 +110,24 @@ export class Google {
     return res.data?.sitemap ?? [];
   }
 
+  async indexUrl(uid: string, url: string) {
+    const credentials = await this.createCredentials(uid);
+
+    const client = google.indexing({
+      version: "v3",
+      auth: this.client(credentials),
+    });
+
+    const res = await client.urlNotifications.publish({
+      requestBody: {
+        url,
+        type: "URL_UPDATED",
+      },
+    });
+
+    return res.data;
+  }
+
   async fetchSitemapLines(uid: string, sid: string, sitemap: string) {
     const credentials = await this.createCredentials(uid);
 
