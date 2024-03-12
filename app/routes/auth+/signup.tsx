@@ -47,7 +47,6 @@ export async function loader({ request }: DataFunctionArgs) {
 
 export async function action({ request }: ActionFunctionArgs) {
   const cloned = request.clone();
-  console.log("INFO: Before Sign Up:", await cloned.text());
 
   const formData = await request.formData();
   const redirectTo = formData.get("redirectTo") as string | undefined;
