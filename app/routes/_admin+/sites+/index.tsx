@@ -9,6 +9,7 @@ import {
 } from "@tanstack/react-table";
 import { useState } from "react";
 import { db } from "~/database/client";
+import { Alert } from "~/features/Admin/UI/Alert";
 import { Button } from "~/features/Admin/UI/Button";
 import { Card } from "~/features/Admin/UI/Card";
 import { Table } from "~/features/Admin/UI/Table";
@@ -88,6 +89,10 @@ export default function Page() {
         </Card.Header>
 
         <Card.Body className="space-y-5 px-0 py-2">
+          <Alert kind="info" className="mx-5">
+            Currently only the 'Domain Resources' are supported.
+          </Alert>
+
           <Table>
             <thead>
               {table.getHeaderGroups().map((group) => (
