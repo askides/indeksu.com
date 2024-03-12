@@ -12,7 +12,7 @@ function Table({ className, ...others }: TableProps) {
 }
 
 const tableCellStyles = tv({
-  base: "px-5 py-3 text-start text-sm tracking-tight text-slate-900",
+  base: "px-5 py-3 text-start text-sm tracking-tight text-slate-900 last-of-type:text-right",
 });
 
 export interface TableCellProps
