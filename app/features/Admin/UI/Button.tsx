@@ -2,9 +2,15 @@ import { forwardRef } from "react";
 import { tv, VariantProps } from "tailwind-variants";
 
 const styles = tv({
-  base: "rounded-xl bg-black text-white font-semibold disabled:bg-slate-700 disabled:cursor-not-allowed",
+  base: "rounded-xl font-semibold disabled:cursor-not-allowed",
   variants: {
+    kind: {
+      dark: "bg-black text-white disabled:bg-slate-700",
+      light:
+        "bg-white text-black disabled:bg-slate-200 border border-slate-200",
+    },
     size: {
+      xs: "h-8 text-xs px-3",
       sm: "h-10 text-sm px-4",
       md: "h-12 text-base px-5",
       lg: "h-14 text-lg px-6",
@@ -16,6 +22,7 @@ const styles = tv({
   defaultVariants: {
     size: "sm",
     fluid: false,
+    kind: "dark",
   },
 });
 
@@ -37,10 +44,21 @@ export interface ButtonProps
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, loading = false, size, fluid, children, ...props }, ref) => {
+  (
+    {
+      className,
+      loading = false,
+      size = "sm",
+      fluid = false,
+      kind = "dark",
+      children,
+      ...props
+    },
+    ref
+  ) => {
     return (
       <button
-        className={styles({ class: className, size, fluid })}
+        className={styles({ class: className, size, fluid, kind })}
         ref={ref}
         disabled={loading}
         {...props}
