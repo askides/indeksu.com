@@ -30,7 +30,7 @@ export default function Page() {
               to="/auth/signup"
               className="rounded-full bg-black text-white px-7 py-4 font-semibold uppercase"
             >
-              Start For Free
+              Start Indexing
             </Link>
             <a
               href="https://github.com/askides/indeksu.com"
@@ -47,25 +47,31 @@ export default function Page() {
               <div className="bg-sky-200 flex rounded-full items-center justify-center p-2">
                 <IconChecks size={20} className="shrink-0 text-sky-700" />
               </div>
-              <span>Coming Soon</span>
+              <span>Index in 48 Hours</span>
             </div>
             <div className="flex items-center gap-3">
               <div className="bg-sky-200 flex rounded-full items-center justify-center p-2">
                 <IconChecks size={20} className="shrink-0 text-sky-700" />
               </div>
-              <span>Coming Soon</span>
+              <span>Detailed Insights</span>
             </div>
             <div className="flex items-center gap-3">
               <div className="bg-sky-200 flex rounded-full items-center justify-center p-2">
                 <IconChecks size={20} className="shrink-0 text-sky-700" />
               </div>
-              <span>Coming Soon</span>
+              <span>Open Source</span>
             </div>
           </div>
         </section>
 
         <section className="my-24">
-          <div className="bg-sky-100 aspect-[4/3] rounded-lg"></div>
+          <div className="bg-sky-100 aspect-[4/3] rounded-lg">
+            <img
+              alt="Indeksu"
+              src="/assets/screenshots/app.jpg"
+              className="rounded-lg aspect-[4/3]"
+            />
+          </div>
         </section>
       </main>
     </>
