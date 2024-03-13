@@ -1,13 +1,14 @@
 import { forwardRef } from "react";
 import { tv, VariantProps } from "tailwind-variants";
 
-const styles = tv({
-  base: "rounded-xl font-semibold disabled:cursor-not-allowed",
+export const styles = tv({
+  base: "inline-flex items-center rounded-xl font-semibold disabled:cursor-not-allowed",
   variants: {
-    kind: {
-      dark: "bg-black text-white disabled:bg-slate-700",
-      light:
-        "bg-white text-black disabled:bg-slate-200 border border-slate-200",
+    tint: {
+      black: "bg-black text-white disabled:bg-slate-700",
+      white: `bg-white text-black disabled:bg-slate-200 border border-slate-200`,
+      emerald: "bg-emerald-500 text-white disabled:bg-slate-700",
+      red: "bg-red-500 text-white disabled:bg-slate-700",
     },
     size: {
       xs: "h-8 text-xs px-3",
@@ -22,11 +23,10 @@ const styles = tv({
   defaultVariants: {
     size: "sm",
     fluid: false,
-    kind: "dark",
+    tint: "black",
   },
 });
 
-// Make a ThreeDots loader component
 export function ThreeDots() {
   return (
     <div className="flex space-x-1">
@@ -50,7 +50,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       loading = false,
       size = "sm",
       fluid = false,
-      kind = "dark",
+      tint = "black",
       children,
       ...props
     },
@@ -58,7 +58,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ) => {
     return (
       <button
-        className={styles({ class: className, size, fluid, kind })}
+        className={styles({ class: className, size, fluid, tint })}
         ref={ref}
         disabled={loading}
         {...props}

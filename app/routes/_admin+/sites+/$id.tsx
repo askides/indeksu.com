@@ -1,6 +1,7 @@
 import { LoaderFunctionArgs, json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { db } from "~/database/client";
+import { Button } from "~/features/Admin/UI/Button";
 import { Card } from "~/features/Admin/UI/Card";
 import { Table } from "~/features/Admin/UI/Table";
 import { authenticator } from "~/features/Shared/Services/auth.server";
@@ -29,6 +30,20 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
 export default function Page() {
   const { site, sitemaps, pages } = useLoaderData<typeof loader>();
 
+  const onToggleIndex = async () => {
+    const response = await fetch(`/api/sites/${site.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ status: site.status === 0 ? 1 : 0 }),
+    });
+
+    if (response.ok) {
+      window.location.reload();
+    }
+  };
+
   return (
     <div className="min-h-screen bg-slate-50 p-5 space-y-5">
       <Card>
@@ -38,7 +53,17 @@ export default function Page() {
             Visualize the details of the site and its sitemaps.
           </Card.Subtitle>
         </Card.Header>
+        <Card.Body className="space-y-5 pt-0">
+          <Button
+            tint={site.status ? "red" : "emerald"}
+            size="sm"
+            onClick={onToggleIndex}
+          >
+            {site.status === 0 ? "Enable Indexing" : "Disable Indexing"}
+          </Button>
+        </Card.Body>
       </Card>
+
       <Card>
         <Card.Header>
           <Card.Title>Sitemap List</Card.Title>

@@ -10,7 +10,7 @@ import {
 import { useState } from "react";
 import { db } from "~/database/client";
 import { Alert } from "~/features/Admin/UI/Alert";
-import { Button } from "~/features/Admin/UI/Button";
+import { Button, styles as buttonStyles } from "~/features/Admin/UI/Button";
 import { Card } from "~/features/Admin/UI/Card";
 import { Table } from "~/features/Admin/UI/Table";
 import { authenticator } from "~/features/Shared/Services/auth.server";
@@ -29,12 +29,14 @@ const columns = [
   columnFactory.display({
     header: "Actions",
     cell: (cell) => (
-      <Link
-        className="text-sky-500 hover:underline"
-        to={`/sites/${cell.row.original.id}`}
-      >
-        View Site
-      </Link>
+      <div className="space-x-2">
+        <Link
+          className={buttonStyles({ tint: "white", size: "xs" })}
+          to={`/sites/${cell.row.original.id}`}
+        >
+          View Site
+        </Link>
+      </div>
     ),
   }),
 ];
@@ -98,7 +100,11 @@ export default function Page() {
               {table.getHeaderGroups().map((group) => (
                 <tr key={group.id}>
                   {group.headers.map((cell) => (
-                    <Table.Cell as="th" key={cell.id}>
+                    <Table.Cell
+                      as="th"
+                      key={cell.id}
+                      className="last-of-type:text-right"
+                    >
                       {flexRender(
                         cell.column.columnDef.header,
                         cell.getContext()
@@ -114,7 +120,7 @@ export default function Page() {
                   {row.getVisibleCells().map((cell) => (
                     <Table.Cell
                       key={cell.id}
-                      className="first-of-type:font-mono"
+                      className="first-of-type:font-mono last-of-type:text-right"
                     >
                       {flexRender(
                         cell.column.columnDef.cell,
