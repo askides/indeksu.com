@@ -70,5 +70,6 @@
   },
   "prisma": {
     "schema": "database/schema.prisma"
-  }
+  },
+  "version": "0.1.0"
 }
